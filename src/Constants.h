@@ -1,6 +1,11 @@
 #pragma once
 
 /**
+ * This header provides engine-wide constants that need to be easily available
+ * for editing runtime parameters.
+*/
+
+/**
  * Target width of the game window.
 */
 const unsigned int WINDOW_WIDTH = 800;
