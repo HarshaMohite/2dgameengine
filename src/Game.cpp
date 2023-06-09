@@ -67,8 +67,27 @@ void Game::ProcessInput() {
 }
 
 void Game::Update() {
+    /** NOTE: This is a less sophisticated way of doing a fixed timestep. This keeps the 
+             CPU thread going.
+    */
     // Wait until FRAME_TARGET_TIME (16.6ms for 60fps) has elapsed since last frame
-    while (!SDL_TICKS_PASSED(SDL_GetTicks(), ticksLastFrame + FRAME_TARGET_TIME));
+    //while (!SDL_TICKS_PASSED(SDL_GetTicks(), ticksLastFrame + FRAME_TARGET_TIME));
+
+
+    /**
+     * NOTE: This method of fixing the timestep can be significantly improved.
+     * Currently, SDL_Delay is limited by the OS scheduler's resolution.
+     * @todo Ideally, we don't cap the framerate but fix the physics timestep and interpolate rendering.
+     * Read more here: https://gafferongames.com/post/fix_your_timestep/
+    */
+    // Amount of time to wait until reaching the target frametime, if the current frame finishes faster than the target
+    int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - ticksLastFrame);
+    
+    // Call delay if we are too early for processing the next frame
+    if (timeToWait > 0 && timeToWait <= FRAME_TARGET_TIME) {
+        SDL_Delay(timeToWait);
+    }
+
 
     // Delta time -- difference in ticks from last frame converted to seconds
     float deltaTime = (SDL_GetTicks() - ticksLastFrame) / 1000.0f;
@@ -88,7 +107,7 @@ void Game::Update() {
 }
 
 void Game::Render() {
-    SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
+    SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255); // background color
     SDL_RenderClear(renderer);
 
     SDL_Rect projectile {
@@ -98,7 +117,7 @@ void Game::Render() {
         10
     };
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // rectangle color
     SDL_RenderFillRect(renderer, &projectile);
 
     SDL_RenderPresent(renderer); // Swap back buffer with front buffer
