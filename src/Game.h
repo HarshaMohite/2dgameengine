@@ -23,6 +23,14 @@ class Game {
          * Pointer to the created SDL renderer.
         */
         SDL_Renderer *renderer;
+
+        /**
+         * The number of ticks elapsed since SDL_Init().
+         * Retrieved from SDL_GetTicks() and used to make DeltaTime calculations
+         * baesd on last frame's tick count.
+        */
+        int ticksLastFrame = 0;
+
     public:
         /**
          * Called to bring up the world for play.
