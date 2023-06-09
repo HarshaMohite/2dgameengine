@@ -1,6 +1,7 @@
 #include <iostream>
 #include "./Constants.h"
 #include "./Game.h"
+#include "../lib/glm/glm.hpp"
 
 /**
  * This class handles the basic launch and structure of the game.
@@ -18,10 +19,8 @@ bool Game::IsRunning() const {
     return this->isRunning;
 }
 
-float projectilePosX = 0.0f;
-float projectilePosY = 0.0f;
-float projectileVelX = 20.0f;
-float projectileVelY = 30.0f;
+glm::vec2 projectilePos(0.0f, 0.0f);
+glm::vec2 projectileVel(20.0f, 20.0f);
 
 void Game::Initialize(int width, int height) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) { 
@@ -102,8 +101,10 @@ void Game::Update() {
     // Set the ticks for the current frame to be used in next frame's DeltaTime calculation
     ticksLastFrame = SDL_GetTicks();
 
-    projectilePosX += projectileVelX * deltaTime;
-    projectilePosY += projectileVelY * deltaTime;
+    projectilePos = glm::vec2(
+        projectilePos.x + projectileVel.x * deltaTime,
+        projectilePos.y + projectileVel.y * deltaTime
+    );
 }
 
 void Game::Render() {
@@ -111,8 +112,8 @@ void Game::Render() {
     SDL_RenderClear(renderer);
 
     SDL_Rect projectile {
-        (int) projectilePosX,
-        (int) projectilePosY,
+        static_cast<int>(projectilePos.x),
+        static_cast<int>(projectilePos.y),
         10,
         10
     };
