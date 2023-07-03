@@ -42,5 +42,5 @@ class Entity {
         void Update(float deltaTime);
         void Render();
         void Destroy();
-        bool isActive() const;
+        bool IsActive() const;
 };

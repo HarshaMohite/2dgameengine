@@ -20,10 +20,10 @@ void Entity::Render() {
     }
 }
 
-void Destroy() {
+void Entity::Destroy() {
     this->isActive = false;
 }
 
-void Entity::isActive() const {
+bool Entity::IsActiveRet() const {
     return this->isActive;
 }
