@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <string>
+#include "./Component.h"
+#include "./EntityManager.h"
 
 class Component;
 class EntityManager;

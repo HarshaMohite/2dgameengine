@@ -20,11 +20,6 @@ class Game {
         SDL_Window *window;
 
         /**
-         * Pointer to the created SDL renderer.
-        */
-        SDL_Renderer *renderer;
-
-        /**
          * The number of ticks elapsed since SDL_Init().
          * Retrieved from SDL_GetTicks() and used to make DeltaTime calculations
          * baesd on last frame's tick count.
@@ -46,6 +41,11 @@ class Game {
          * @return bool isRunning, which states if the game is currently active.
         */
         bool IsRunning() const;
+
+        /**
+         * Pointer to the created SDL renderer.
+        */
+        static SDL_Renderer *renderer;
 
         /**
          * Initializes SDL, the game window, and any necessary components.
