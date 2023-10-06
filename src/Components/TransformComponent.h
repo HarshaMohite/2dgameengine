@@ -15,6 +15,8 @@ class TransformComponent: public Component {
 
         /**
          * Current travel velocity.
+         * 
+         * Note: This is NOT common for most engines. In the future, refactor this into a RigidBodyComponent.
         */
         glm::vec2 velocity;
 

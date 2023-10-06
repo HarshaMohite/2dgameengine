@@ -22,8 +22,6 @@ bool Game::IsRunning() const {
     return this->isRunning;
 }
 
-glm::vec2 projectilePos(0.0f, 0.0f);
-glm::vec2 projectileVel(20.0f, 20.0f);
 
 void Game::Initialize(int width, int height) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) { 
@@ -104,25 +102,13 @@ void Game::Update() {
     // Set the ticks for the current frame to be used in next frame's DeltaTime calculation
     ticksLastFrame = SDL_GetTicks();
 
-    projectilePos = glm::vec2(
-        projectilePos.x + projectileVel.x * deltaTime,
-        projectilePos.y + projectileVel.y * deltaTime
-    );
 }
 
 void Game::Render() {
     SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255); // background color
     SDL_RenderClear(renderer);
 
-    SDL_Rect projectile {
-        static_cast<int>(projectilePos.x),
-        static_cast<int>(projectilePos.y),
-        10,
-        10
-    };
-
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // rectangle color
-    SDL_RenderFillRect(renderer, &projectile);
+     
 
     SDL_RenderPresent(renderer); // Swap back buffer with front buffer
 }
