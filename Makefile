@@ -1,7 +1,7 @@
 build:
 	g++ -w -std=c++14 -Wfatal-errors \
 	./src/*.cpp \
-	-o game \
+	-o ./build_output/game \
 	-I"./lib/lua" \
 	-L"./lib/lua" \
 	-llua5.4 \

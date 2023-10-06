@@ -10,4 +10,5 @@
 
 # Built Visual Studio Code Extensions
 *.vsix
-game
+
+build_output/*

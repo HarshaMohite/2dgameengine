@@ -3,6 +3,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include "Entity.h"
+#include "Component.h"
+#include "EntityManager.h"
 
 /**
  * This class handles the basic launch and structure of the game.
@@ -46,6 +49,8 @@ class Game {
          * Pointer to the created SDL renderer.
         */
         static SDL_Renderer *renderer;
+
+        void LoadLevel(int levelNumber);
 
         /**
          * Initializes SDL, the game window, and any necessary components.

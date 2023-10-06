@@ -7,6 +7,9 @@
  * This class handles the basic launch and structure of the game.
 */
 
+EntityManager manager; 
+SDL_Renderer* Game::renderer;
+
 Game::Game() {
     this->isRunning = false;
 }
